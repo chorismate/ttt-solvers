@@ -1,5 +1,5 @@
 /*
- * algor.c: algorithmic tic-tac-toe solver
+ * algor.c: algorithmic tic-tac-toe weak solver
  *            (as a reference for the negamax-based solvers)
  * Written in 2023 by Chorismate <me@chorismate.dev>
  *
@@ -10,6 +10,8 @@
  * You should have received a copy of the CC0 Public Domain Dedication along
  * with this software. If not, see
  * <http://creativecommons.org/publicdomain/zero/1.0/>.
+ *
+ *
  */
 
 #include<inttypes.h>
@@ -21,7 +23,7 @@
  * 6 7 8
  */
 
-/* Returns an pointer to an array of 8 uint8_t:
+/* Returns an pointer to an array of 8 int8_t:
  * 0: 0-1-2
  * 1: 3-4-5
  * 2: 6-7-8
@@ -31,16 +33,20 @@
  * 6: 0-4-8
  * 7: 2-4-6
  * For each:
+ * -4: The opponent has a win on that line.
+ * -3: The opponent has 2 on that line.
+ * -2: The opponent has 1 on that line.
  * 0: The line is empty.
  * 1: The line is blocked (has at least 1 of each color).
  * 2: The current player has 1 on that line.
  * 3: The current player has 2 on that line.
  * 4: The current player has a win on that line.
- * 5: The opponent has 1 on that line.
- * 6: The opponent has 2 on that line.
- * 7: The opponent has a win on that line.
  */
-uint8_t* get_aligns(uint8_t *state) {
+int8_t *get_aligns(int8_t *state) {
+	int8_t *arrayptr = malloc(8*sizeof(int8_t));
+	for(uint8_t i=0; i<3; i++) {
+		
+	}
 }
 
 /* Takes an pointer to an array of 9 uint8_t,
