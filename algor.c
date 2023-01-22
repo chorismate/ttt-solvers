@@ -88,6 +88,28 @@ int8_t *get_aligns(int8_t *state) {
 	return arrayptr;
 }
 
+/* If there is a win in one for the current player, return it.
+ * If not, return 9.
+ */
+int8_t find_win(int8_t *state) {
+	int8_t *aligns = get_aligns(state);
+	for(int8_t i=0; i<=7; i++) {
+		// Check aligns[] for a 3. Upon finding a 3,
+		// free *aligns and
+		// return the location of the 0 cell in the align
+	}
+	free(aligns);
+	return 9;
+}
+
+/* Inverts a game state (changing the player whose turn it is).
+ */
+void invert(int8_t *state) {
+	for(int8_t i=0; i<=8; i++)
+		state[i] = -state[i];
+}
+
+
 /* Takes an pointer to an array of 9 uint8_t,
  * returns best move in grid as a uint8_t
  */
