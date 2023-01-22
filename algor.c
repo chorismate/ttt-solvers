@@ -14,6 +14,7 @@
  *
  */
 
+#include<assert.h>
 #include<inttypes.h>
 #include<stdio.h>
 
@@ -22,6 +23,47 @@
  * 3 4 5
  * 6 7 8
  */
+
+/* For each:
+ * -4: The opponent has a win on that line.
+ * -3: The opponent has 2 on that line.
+ * -2: The opponent has 1 on that line.
+ * -1: The line is empty.
+ * 1: The line is blocked (has at least 1 of each color).
+ * 2: The current player has 1 on that line.
+ * 3: The current player has 2 on that line.
+ * 4: The current player has a win on that line.
+ */
+int8_t linevalue(int8_t a, int8_t b, int8_t c) {
+	assert(-1<=a && a<=1 && -1<=b && b<=1 && -1<=c && c<=1);
+
+	switch(a + b + c) {
+		case  3:
+			return 4;
+			break;
+		case -3:
+			return -4;
+			break;
+		case  2:
+			return 3;
+			break;
+		case -2:
+			return -3;
+			break;
+		case  1:
+			if(!a || !b || !c) return 2;
+			else               return 1;
+			break;
+		case -1:
+			if(!a || !b || !c) return -2;
+			else               return 1;
+			break;
+		case  0:
+			if(!a && !b && !c) return -1;
+			else               return 1;
+			break;
+	}
+}
 
 /* Returns an pointer to an array of 8 int8_t:
  * 0: 0-1-2
@@ -32,15 +74,6 @@
  * 5: 2-5-8
  * 6: 0-4-8
  * 7: 2-4-6
- * For each:
- * -4: The opponent has a win on that line.
- * -3: The opponent has 2 on that line.
- * -2: The opponent has 1 on that line.
- * 0: The line is empty.
- * 1: The line is blocked (has at least 1 of each color).
- * 2: The current player has 1 on that line.
- * 3: The current player has 2 on that line.
- * 4: The current player has a win on that line.
  */
 int8_t *get_aligns(int8_t *state) {
 	int8_t *arrayptr = malloc(8*sizeof(int8_t));
