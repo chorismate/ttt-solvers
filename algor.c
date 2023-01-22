@@ -77,9 +77,15 @@ int8_t linevalue(int8_t a, int8_t b, int8_t c) {
  */
 int8_t *get_aligns(int8_t *state) {
 	int8_t *arrayptr = malloc(8*sizeof(int8_t));
-	for(uint8_t i=0; i<3; i++) {
-		
-	}
+	
+	for(int8_t i=0; i<=2; i++)
+		arrayptr[i] = linevalue(state[i*3], state[(i*3)+1], state[(i*3)+2]);
+	for(int8_t i=0; i<=2;i++)
+		arrayptr[i+3] = linevalue(state[i], state[i+3], state[i+6]);
+	arrayptr[6] = linevalue(state[0], state[4], state[8]);
+	arrayptr[7] = linevalue(state[2], state[4], state[6]);
+	
+	return arrayptr;
 }
 
 /* Takes an pointer to an array of 9 uint8_t,
