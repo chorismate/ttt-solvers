@@ -93,11 +93,11 @@ int8_t *get_aligns(int8_t *state) {
  */
 int8_t find_win(int8_t *state) {
 	int8_t *aligns = get_aligns(state);
-	for(int8_t i=0; i<=7; i++) {
-		// Check aligns[] for a 3. Upon finding a 3,
-		// free *aligns and
-		// return the location of the 0 cell in the align
-	}
+	for(int8_t i=0; i<=7; i++)
+		if(aligns[i] == 3) {
+			free(aligns);
+			return i;
+		}
 	free(aligns);
 	return 9;
 }
